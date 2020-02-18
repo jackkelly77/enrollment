@@ -1,0 +1,26 @@
+---
+title: "enrollment"
+author: "Jack Kelly"
+date: "2/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidycensus)
+library(readxl)
+library(tidyverse)
+library(janitor)
+
+enrollment = read_excel("class_enrollment_summary_by_term2.18.20.xlsx", skip = 3) %>%
+  clean_names() %>%
+  filter(! is.na(course_name)) %>%
+  arrange(desc(total)) %>%
+  select(course_name, total)
+
+enrollment
+
+```
